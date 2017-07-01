@@ -765,6 +765,61 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>MYUI</GroupName>
+          <Files>
+            <File>
+              <FileName>ETI_logo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\ETI_logo.c</FilePath>
+            </File>
+            <File>
+              <FileName>QQ.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\QQ.c</FilePath>
+            </File>
+            <File>
+              <FileName>QQ2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\QQ2.c</FilePath>
+            </File>
+            <File>
+              <FileName>QQVIP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\QQVIP.c</FilePath>
+            </File>
+            <File>
+              <FileName>Win1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\Win1.c</FilePath>
+            </File>
+            <File>
+              <FileName>Win2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\Win2.c</FilePath>
+            </File>
+            <File>
+              <FileName>Win3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\Win3.c</FilePath>
+            </File>
+            <File>
+              <FileName>Win4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\Win4.c</FilePath>
+            </File>
+            <File>
+              <FileName>win5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\win5.c</FilePath>
+            </File>
+            <File>
+              <FileName>winheader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI-practise\winheader.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>

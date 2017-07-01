@@ -336,51 +336,29 @@ void Touch_Init(void)
 u8	Touch_Scan(void)
 {
  	u8  touchData[2 + 8 * TOUCH_MAX ]; //用于存储触摸数据
-
+memset(touchData,0,10);
 	GT9XX_ReadData (GT9XX_READ_ADDR,2 + 8 * TOUCH_MAX ,touchData);	//读数据
 	GT9XX_WriteData (GT9XX_READ_ADDR,0);	//	清除触摸芯片的寄存器标志位
 	touchInfo.num = touchData[0] & 0x0f;	//取当前的触摸点数
 	
-	if ( (touchInfo.num >= 1) && (touchInfo.num <=5) ) //当触摸数在 1-5 之间时
+	if ( (touchInfo.num ) ) //当触摸数在 1-5 之间时>= 1) && (touchInfo.num <=5
 	{
 		// 取相应的触摸坐标
-		switch(touchInfo.num)
-		{
-			case 5:
-			{
-				touchInfo.y[4] = (touchData[5+32]<<8) | touchData[4+32];
-				touchInfo.x[4] = (touchData[3+32]<<8) | touchData[2+32];	
-     		}
-			case 4:
-			{
-				touchInfo.y[3] = (touchData[5+24]<<8) | touchData[4+24];
-				touchInfo.x[3] = (touchData[3+24]<<8) | touchData[2+24];		
-			}
-			case 3:
-			{
-				touchInfo.y[2] = (touchData[5+16]<<8) | touchData[4+16];
-				touchInfo.x[2] = (touchData[3+16]<<8) | touchData[2+16];				
-			}
-			case 2:
-			{
-				touchInfo.y[1] = (touchData[5+8]<<8) | touchData[4+8];
-				touchInfo.x[1] = (touchData[3+8]<<8) | touchData[2+8];			
-				
-			}
-			case 1:
-			{
-				touchInfo.y[0] = ((touchData[5]<<8) | touchData[4])*0.81;
-				touchInfo.x[0] = ((touchData[3]<<8) | touchData[2])*0.78;					
-			}
-			default:break;
-		}	
-		touchInfo.flag = 1;		
+	if(touchData[5]<200)
+						touchInfo.y[0] = ((touchData[5]<<8) | touchData[4])*0.81+1;
+
+		if(touchData[3]<200)
+				touchInfo.x[0] = ((touchData[3]<<8) | touchData[2])*0.78+1;	
+
 		return	SUCCESS ;	
 	}
 
 	else                       
-	{
-		touchInfo.flag = 0;
+	{	
+		
+		touchInfo.x[0] = 0;
+		touchInfo.y[0] = 0;
+
 		return	ERROR ;		
 	}
 	

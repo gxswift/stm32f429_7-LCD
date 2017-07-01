@@ -90,7 +90,7 @@ Purpose     : Display controller configuration (single layer)
   #define YSIZE_1 YSIZE_PHYS
 #endif
 
-
+#define GUI_TOUCH 
 /* Number of multiple buffers to be used */
 #define NUM_BUFFERS  3
 

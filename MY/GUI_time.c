@@ -291,6 +291,7 @@ void  _cbDesktop( WM_MESSAGE * pMsg)
 }
 
 /******************************		Main函数	*********************************/
+
 void APP_Time(void)
 {
 	
@@ -308,7 +309,7 @@ void APP_Time(void)
 	TEXT_SetDefaultTextColor(AdjustText_Color);	
 	
 	Button_HWIN = GUI_CreateDialogBox(_ButtonDialog,GUI_COUNTOF(_ButtonDialog),_cbButton,WM_HBKWIN,510,152);	//使用资源表创建对话框
-	
+
 	while(1)
 	{		
 		if(alarmWindow == 0 && timerWindow == 0 && adjustWindow == 0)		
