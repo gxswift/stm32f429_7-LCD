@@ -180,12 +180,46 @@ static  void  Start_Task (void *p_arg)
 
 /*---------------------- emWinDemo TASK ------------------------*/
 
+void test()
+{	OS_ERR      err;
+		  GUI_SetFont(&GUI_Font32B_ASCII);
+
+	while(1)
+	{	GUI_PID_STATE pState;
+		OSTimeDly ( 200, OS_OPT_TIME_DLY, & err );
+		
+		GUI_DispStringAt("X:",60,10);
+				GUI_DispDecAt(touchInfo.x[0],100,10,5);
+		
+		GUI_DispStringAt("Y:",260,10);
+		GUI_DispDecAt(touchInfo.y[0],300,10,5);
+
+		
+		GUI_DispStringAt("NUM:",460,10);
+		GUI_DispDecAt(touchInfo.num,550,10,3);	
+
+
+    GUI_TOUCH_GetState(&pState);
+		
+		GUI_DispStringAt("cX:",60,110);
+				GUI_DispDecAt(pState.x,100,110,5);
+		
+		GUI_DispStringAt("cY:",260,110);
+		GUI_DispDecAt(pState.y,300,110,5);
+
+		
+		GUI_DispStringAt("cP:",460,110);
+		GUI_DispDecAt(pState.Pressed,550,110,3);			
+		
+	}
+}
+extern void MainTask(void);
 static	void	emWinDemo_Task (void *p_arg)
 {	
 	(void)p_arg;
-	
-	APP_Time();
-
+//	test();
+//	APP_Time();
+	MainTask();
 }
 /*---------------------- Touch TASK ------------------------*/
 
@@ -199,7 +233,7 @@ static	void	Touch_Task (void *p_arg)
 	while(DEF_TRUE)
 	{	
 		GUI_TouchScan();	
-		OSTimeDly ( 20, OS_OPT_TIME_DLY, & err );	
+		OSTimeDly ( 10, OS_OPT_TIME_DLY, & err );	
 	}
 }
 

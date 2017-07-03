@@ -64,7 +64,6 @@ Purpose     : Display controller initialization
 //
 #define GUI_NUMBYTES  1024 * 4096
 #define GUI_EXTBUFADD  0xD02ee000
-  
 //	函数：内存划分
 //
 void GUI_X_Config(void) {

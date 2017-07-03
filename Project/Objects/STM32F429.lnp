@@ -66,6 +66,16 @@
 ".\objects\os_cpu_c.o"
 ".\objects\os_cpu_a.o"
 ".\objects\os_app_hooks.o"
+".\objects\eti_logo.o"
+".\objects\qq.o"
+".\objects\qq2.o"
+".\objects\qqvip.o"
+".\objects\win1.o"
+".\objects\win2.o"
+".\objects\win3.o"
+".\objects\win4.o"
+".\objects\win5.o"
+".\objects\winheader.o"
 --library_type=microlib --strict --scatter ".\Objects\STM32F429.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

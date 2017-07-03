@@ -19,10 +19,10 @@
 
 #define   Start_Task_PRIO        2
 
-#define	 emWinDemo_Task_PRIO		3
-#define	 Touch_Task_PRIO			4
-#define	 LED0_Task_PRIO			5
-#define	 LED1_Task_PRIO			5
+#define	 emWinDemo_Task_PRIO		5
+#define	 Touch_Task_PRIO			3
+#define	 LED0_Task_PRIO			4
+#define	 LED1_Task_PRIO			4
 
 /*--------------------- 任务堆栈大小  --------------------*/
 

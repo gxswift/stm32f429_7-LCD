@@ -1,0 +1,9 @@
+.\objects\qq2.o: ..\GUI-practise\QQ2.c
+.\objects\qq2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\qq2.o: ..\emWin\inc\GUI.h
+.\objects\qq2.o: ..\emWin\inc\GUI_ConfDefaults.h
+.\objects\qq2.o: ..\emWin\Config\GUIConf.h
+.\objects\qq2.o: ..\emWin\inc\GUI_Type.h
+.\objects\qq2.o: ..\emWin\inc\LCD.h
+.\objects\qq2.o: ..\emWin\inc\Global.h
+.\objects\qq2.o: ..\emWin\inc\GUI_Version.h
