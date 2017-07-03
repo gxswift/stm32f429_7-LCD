@@ -22,7 +22,6 @@
 // USER END
 
 #include "DIALOG.h"
-
 /*********************************************************************
 *
 *       Defines
@@ -33,7 +32,8 @@
 #define ID_BUTTON_0 (GUI_ID_USER + 0x02)
 #define ID_BUTTON_1 (GUI_ID_USER + 0x03)
 #define ID_LISTWHEEL_0 (GUI_ID_USER + 0x04)
-
+#define ID_LISTWHEEL_1 (GUI_ID_USER + 0x05)
+#define ID_LISTWHEEL_2 (GUI_ID_USER + 0x06)
 #define DATE_DIS (WM_USER+1)
 // USER START (Optionally insert additional defines)
 // USER END
@@ -56,7 +56,9 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { WINDOW_CreateIndirect, "Window", ID_WINDOW_0, 0, 50, 800, 430, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "return", ID_BUTTON_0, 715, 346, 60, 45, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "OK", ID_BUTTON_1, 615, 346, 60, 45, 0, 0x0, 0 },
-  { LISTWHEEL_CreateIndirect, "Listwheel", ID_LISTWHEEL_0, 644, 30, 130, 298, 0, 0x0, 0 },
+  { LISTWHEEL_CreateIndirect, "Listwheel", ID_LISTWHEEL_0, 600, 60, 50, 200, 0, 0x0, 0 },
+  { LISTWHEEL_CreateIndirect, "Listwheel", ID_LISTWHEEL_1, 650, 60, 50, 200, 0, 0x0, 0 },
+  { LISTWHEEL_CreateIndirect, "Listwheel", ID_LISTWHEEL_2, 700, 60, 50, 200, 0, 0x0, 0 },
   // USER START (Optionally insert additional widgets)
   // USER END
 };
@@ -79,8 +81,8 @@ static int _OwnerDraw(const WIDGET_ITEM_DRAW_INFO * pDrawItemInfo) {
 		GUI_DrawHLine(181, 0, 130);*/
 	/*break;
 	case WIDGET_DRAW_BACKGROUND:*/
-		GUI_DrawGradientV(0, 0, 130, 125, GUI_DARKGRAY, 0xee000000 | GUI_BLUE);
-		GUI_DrawGradientV(0, 180, 130, 298, 0xee000000 | GUI_BLUE,  GUI_DARKGRAY);
+		GUI_DrawGradientV(0, 0, 50, 80, GUI_DARKGRAY, 0xee000000 | GUI_BLUE);
+		GUI_DrawGradientV(0, 120, 50, 200, 0xee000000 | GUI_BLUE,  GUI_DARKGRAY);
 		break;
 	default:
 		return LISTWHEEL_OwnerDraw(pDrawItemInfo);
@@ -106,9 +108,11 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   int     NCode;
   int     Id;
   static WM_HWIN hCalen;
-
-  static int Select;
-  static int Select2;
+  int    i;
+  char   str[10];
+  static int Select1,d1;
+  static int Select2,d2;
+  static int Select3,d3;
   // USER START (Optionally insert additional variables)
   // USER END
 
@@ -118,32 +122,74 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	  GUI_SetTextMode(GUI_TM_TRANS);
 	  GUI_SetColor(GUI_BLACK);
 	  GUI_SetFont(&GUI_Font20B_1);
-	  GUI_DispStringAt("POS:",580,320);
-	  GUI_DispDecAt(Select,630,320,1);
-	  GUI_DispStringAt("SEL:",580,290);
-	  GUI_DispDecAt(Select2, 630, 290, 1);
+
+	  GUI_DispDecAt(d1,615,300,2);
+	  GUI_DispDecAt(d2, 665, 300, 2);
+	  GUI_DispDecAt(d3, 715, 300, 2);
+	  GUI_DispStringAt(":", 640, 300);
+	  GUI_DispStringAt(":", 690, 300);
 	  break;
   case WM_INIT_DIALOG:
     //
     // Initialization of 'Listwheel'
     //
     hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_0);
-	LISTWHEEL_SetLineHeight(hItem, 60);
+	LISTWHEEL_SetLineHeight(hItem, 40);
 	LISTWHEEL_SetBkColor(hItem, LISTWHEEL_CI_UNSEL, GUI_WHITE);
-	LISTWHEEL_SetTextAlign(hItem, GUI_TA_VCENTER);
-
-
+	LISTWHEEL_SetTextAlign(hItem, GUI_TA_VCENTER | GUI_TA_HCENTER);
 
 	LISTWHEEL_SetFont(hItem, &GUI_Font32B_1);
-    LISTWHEEL_AddString(hItem, "ZERO");
-    LISTWHEEL_AddString(hItem, "ONE");
-    LISTWHEEL_AddString(hItem, "TWO");
-    LISTWHEEL_AddString(hItem, "THREE");
-	LISTWHEEL_AddString(hItem, "FOUR");
-	LISTWHEEL_AddString(hItem, "FIVE");
-	LISTWHEEL_AddString(hItem, "SIX");
-	LISTWHEEL_AddString(hItem, "SEVEN");
+	for (i = 0; i < 24; i++)
+	{
+		sprintf(str, "%d", i);
+		LISTWHEEL_AddString(hItem, str);
+	}
 	LISTWHEEL_SetOwnerDraw(hItem, _OwnerDraw);
+	LISTWHEEL_SetSel(hItem, Hour);
+	if (Hour>2)
+		LISTWHEEL_SetPos(hItem, Hour - 2);
+	else
+		LISTWHEEL_SetPos(hItem, Hour + 22);
+
+    hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_1);
+	LISTWHEEL_SetLineHeight(hItem, 40);
+	LISTWHEEL_SetBkColor(hItem, LISTWHEEL_CI_UNSEL, GUI_WHITE);
+	LISTWHEEL_SetTextAlign(hItem, GUI_TA_VCENTER | GUI_TA_HCENTER);
+
+	LISTWHEEL_SetFont(hItem, &GUI_Font32B_1);
+	for (i = 0; i < 60; i++)
+	{
+		sprintf(str, "%d", i);
+		LISTWHEEL_AddString(hItem, str);
+	}
+	LISTWHEEL_SetOwnerDraw(hItem, _OwnerDraw);
+	LISTWHEEL_SetSel(hItem, Min);
+	if (Min>2)
+		LISTWHEEL_SetPos(hItem, Min - 2);
+	else
+		LISTWHEEL_SetPos(hItem, Min + 58);
+
+
+	hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_2);
+	LISTWHEEL_SetLineHeight(hItem, 40);
+	LISTWHEEL_SetBkColor(hItem, LISTWHEEL_CI_UNSEL, GUI_WHITE);
+	LISTWHEEL_SetTextAlign(hItem, GUI_TA_VCENTER | GUI_TA_HCENTER);
+	LISTWHEEL_SetFont(hItem, &GUI_Font32B_1);
+	for (i = 0; i < 60; i++)
+	{
+		sprintf(str, "%d", i);
+		LISTWHEEL_AddString(hItem, str);
+	}
+	LISTWHEEL_SetOwnerDraw(hItem, _OwnerDraw);
+	LISTWHEEL_SetSel(hItem, Sec);
+	if (Sec>2)
+	LISTWHEEL_SetPos(hItem, Sec-2);
+	else
+	LISTWHEEL_SetPos(hItem, Sec+58);
+
+	d1 = Hour;
+	d2 = Min;
+	d3 = Sec;
 
 	CALENDAR_SetDefaultFont(CALENDAR_FI_CONTENT,&GUI_Font32B_1);
 	CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, &GUI_Font32_1);
@@ -185,12 +231,33 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
       case WM_NOTIFICATION_RELEASED:
         // USER START (Optionally insert code for reacting on notification message)
 		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_0);
+		  Select1 = LISTWHEEL_GetPos(hItem);
+
+		  if (Select1 >21)d1 = Select1- 22;
+		  else d1 = Select1 + 2;
+		  LISTWHEEL_SetSel(hItem,d1);
+
+		//  Select = Select2;
+
+		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_1);
 		  Select2 = LISTWHEEL_GetPos(hItem);
 
-		  if (Select2 >5)Select2 -= 6;
-		  else Select2 += 2;
-		  LISTWHEEL_SetSel(hItem,Select2);
-		  Select = Select2;
+		  if (Select2 >57)d2 = Select2 - 58;
+		  else d2 = Select2 + 2;
+		  LISTWHEEL_SetSel(hItem, d2);
+
+		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_2);
+		  Select3 = LISTWHEEL_GetPos(hItem);
+
+		  if (Select3 >57)d3 = Select3 - 58;
+		  else d3 = Select3 + 2;
+		  LISTWHEEL_SetSel(hItem, d3);
+
+		  Hour = d1;
+		  Min = d2;
+		  Sec = d3;
+
+
 		  // hCalen
 		  CALENDAR_GetSel(hCalen, &Date);
 		  CALENDAR_SetDate(hCalen, &Date);
@@ -216,8 +283,19 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
       case WM_NOTIFICATION_SEL_CHANGED:
         // USER START (Optionally insert code for reacting on notification message)
 		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_0);
-		  Select = LISTWHEEL_GetPos(hItem);
-		  Select2 = LISTWHEEL_GetSel(hItem);
+		  Select1 = LISTWHEEL_GetPos(hItem);
+		  if (Select1 >21)d1 = Select1 - 22;
+		  else d1 = Select1 + 2;
+
+		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_1);
+		  Select2 = LISTWHEEL_GetPos(hItem);
+		  if (Select2 >57)d2 = Select2 - 58;
+		  else d2 = Select2 + 2;
+
+		  hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_2);
+		  Select3 = LISTWHEEL_GetPos(hItem);
+		  if (Select3 >57)d3 = Select3 - 58;
+		  else d3 = Select3 + 2;
 		  WM_InvalidateWindow(pMsg->hWin);
         // USER END
         break;
@@ -227,6 +305,76 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
       break;
     // USER START (Optionally insert additional code for further Ids)
     // USER END
+	case ID_LISTWHEEL_1: // Notifications sent by 'Listwheel'
+		switch (NCode) {
+		case WM_NOTIFICATION_CLICKED:
+			// USER START (Optionally insert code for reacting on notification message)
+			// USER END
+			break;
+		case WM_NOTIFICATION_RELEASED:
+			// USER START (Optionally insert code for reacting on notification message)
+			// USER END
+			break;
+		case WM_NOTIFICATION_SEL_CHANGED:
+			// USER START (Optionally insert code for reacting on notification message)
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_0);
+			Select1 = LISTWHEEL_GetPos(hItem);
+			if (Select1 >21)d1 = Select1 - 22;
+			else d1 = Select1 + 2;
+
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_1);
+			Select2 = LISTWHEEL_GetPos(hItem);
+			if (Select2 >57)d2 = Select2 - 58;
+			else d2 = Select2 + 2;
+
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_2);
+			Select3 = LISTWHEEL_GetPos(hItem);
+			if (Select3 >57)d3 = Select3 - 58;
+			else d3 = Select3 + 2;
+			WM_InvalidateWindow(pMsg->hWin);
+			// USER END
+			break;
+			// USER START (Optionally insert additional code for further notification handling)
+			// USER END
+		}
+		break;
+		// USER START (Optionally insert additional code for further Ids)
+		// USER END
+	case ID_LISTWHEEL_2: // Notifications sent by 'Listwheel'
+		switch (NCode) {
+		case WM_NOTIFICATION_CLICKED:
+			// USER START (Optionally insert code for reacting on notification message)
+			// USER END
+			break;
+		case WM_NOTIFICATION_RELEASED:
+			// USER START (Optionally insert code for reacting on notification message)
+			// USER END
+			break;
+		case WM_NOTIFICATION_SEL_CHANGED:
+			// USER START (Optionally insert code for reacting on notification message)
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_0);
+			Select1 = LISTWHEEL_GetPos(hItem);
+			if (Select1 >21)d1 = Select1 - 22;
+			else d1 = Select1 + 2;
+
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_1);
+			Select2 = LISTWHEEL_GetPos(hItem);
+			if (Select2 >57)d2 = Select2 - 58;
+			else d2 = Select2 + 2;
+
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTWHEEL_2);
+			Select3 = LISTWHEEL_GetPos(hItem);
+			if (Select3 >57)d3 = Select3 - 58;
+			else d3 = Select3 + 2;
+			WM_InvalidateWindow(pMsg->hWin);
+			// USER END
+			break;
+			// USER START (Optionally insert additional code for further notification handling)
+			// USER END
+		}
+		break;
+		// USER START (Optionally insert additional code for further Ids)
+		// USER END
     }
     break;
   // USER START (Optionally insert additional message handling)

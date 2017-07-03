@@ -52,6 +52,7 @@
 // USER START (Optionally insert additional defines)
 // USER END
 extern GUI_CONST_STORAGE GUI_BITMAP bmlogo;
+extern GUI_CONST_STORAGE GUI_BITMAP bmQQ2;
 /*********************************************************************
 *
 *       Static data
@@ -193,7 +194,10 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 //  GUI_DrawGradientH(0, 0, 1023, 79, 0x0080ff80, GUI_LIGHTBLUE);
 
 	  GUI_DrawGradientH(0, 0, 800, 50, GUI_WHITE, 0x00FFA0A0);
+	  if (Sec%10>5)
 	  GUI_DrawBitmap(&bmlogo, 10, 8);
+	  else
+	  GUI_DrawBitmap(&bmQQ2, 10, 2);
 	  GUI_SetColor(GUI_BLACK);
 	  GUI_SetFont(&GUI_Font32B_ASCII);
 	  GUI_SetTextMode(GUI_TM_TRANS);
