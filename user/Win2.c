@@ -150,7 +150,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	MULTIPAGE_EnablePage(hItem,1);
 	//MULTIPAGE_SelectPage(hItem, 4);
 
-
 	hItem = WM_GetDialogItem(pMsg->hWin, ID_RADIO_0);
 	RADIO_SetTextColor(hItem,GUI_RED);
 	RADIO_SetFont(hItem,&GUI_Font32B_1);

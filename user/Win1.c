@@ -356,7 +356,6 @@ WM_HWIN CreateWin1(void) {
   hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
   return hWin;
 }
-
 // USER START (Optionally insert additional public code)
 // USER END
 

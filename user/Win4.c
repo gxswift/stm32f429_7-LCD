@@ -211,7 +211,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	  GUI_SetColor(GUI_BLACK);
 	  GUI_FillCircle(150, 100, 5);
 	  GUI_FillCircle(150, 120, 5);
-
 	  GUI_FillCircle(150+140, 100, 5);
 	  GUI_FillCircle(150+140, 120, 5);
 

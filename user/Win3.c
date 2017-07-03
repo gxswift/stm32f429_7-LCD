@@ -122,7 +122,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	  GUI_SetTextMode(GUI_TM_TRANS);
 	  GUI_SetColor(GUI_BLACK);
 	  GUI_SetFont(&GUI_Font20B_1);
-
 	  GUI_DispDecAt(d1,615,300,2);
 	  GUI_DispDecAt(d2, 665, 300, 2);
 	  GUI_DispDecAt(d3, 715, 300, 2);

@@ -289,7 +289,6 @@ void MainTask(void) {
 	WIN_Header = CreateHeaderWindow();
 	while (1) {
 		GUI_Exec();
-
 	}
 }
 /*************************** End of file ****************************/

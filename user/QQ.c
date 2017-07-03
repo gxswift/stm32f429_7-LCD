@@ -1449,7 +1449,6 @@ static GUI_CONST_STORAGE unsigned char _acQQ[] = {
   /* RLE: 1892 Pixels @ 110,149 */ 254, 0x00, 254, 0x00, 254, 0x00, 254, 0x00, 254, 0x00, 254, 0x00, 254, 0x00, 114, 0x00, 
   0
 };  // 3717 bytes for 24948 pixels
-
 GUI_CONST_STORAGE GUI_BITMAP bmQQ = {
   154, // xSize
   162, // ySize
